@@ -5,6 +5,10 @@ import uuid
 import json
 import firebase_admin
 from firebase_admin import credentials, storage
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app, origins=["chrome-extension://piahfocncoagnafmgkijmniimnjfaddi"])
 
 # --- Load Firebase Credentials from Environment ---
 FIREBASE_CREDS_JSON = os.getenv("FIREBASE_CREDENTIALS_JSON")
