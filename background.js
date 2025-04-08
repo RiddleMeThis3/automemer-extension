@@ -10,7 +10,7 @@ chrome.runtime.onInstalled.addListener(() => {
     if (info.menuItemId === "uploadMeme") {
       const imageUrl = info.srcUrl;
   
-      fetch("https://your-backend-api.com/upload", {
+      fetch("https://automemer-extension.onrender.com/upload", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ imageUrl })

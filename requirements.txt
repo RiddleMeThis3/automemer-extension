@@ -31,6 +31,7 @@ google-resumable-media==2.7.2
 googleapis-common-protos==1.69.2
 grpcio==1.71.0
 grpcio-status==1.71.0
+gunicorn==23.0.0
 h11==0.14.0
 httpcore==1.0.7
 httplib2==0.22.0
@@ -54,6 +55,7 @@ numpy==2.0.2
 oauthlib==3.2.2
 openai==1.70.0
 openai-whisper==20240930
+packaging==24.2
 piapi==0.1.5
 pillow==10.4.0
 proglog==0.1.11
