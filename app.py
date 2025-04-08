@@ -4,6 +4,7 @@ import os
 import uuid
 import json
 import firebase_admin
+import requests
 from firebase_admin import credentials, storage
 from flask_cors import CORS
 
@@ -32,6 +33,33 @@ def upload_to_firebase(local_path: str, remote_path: str) -> str:
 # --- Flask App ---
 app = Flask(__name__)
 CORS(app, origins=["chrome-extension://piahfocncoagnafmgkijmniimnjfaddi"])
+
+@app.route("/upload-url", methods=["POST"])
+def upload_image_from_url():
+    data = request.get_json()
+    image_url = data.get("url")
+    if not image_url:
+        return jsonify({"error": "No URL provided"}), 400
+
+    try:
+        response = requests.get(image_url)
+        if response.status_code != 200:
+            return jsonify({"error": "Failed to download image"}), 400
+
+        filename = f"{uuid.uuid4()}.jpg"
+        temp_path = os.path.join("temp", filename)
+        with open(temp_path, "wb") as f:
+            f.write(response.content)
+
+        firebase_path = f"memes/{filename}"
+        public_url = upload_to_firebase(temp_path, firebase_path)
+        os.remove(temp_path)
+
+        return jsonify({"url": public_url}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 
 @app.route("/upload", methods=["POST"])
