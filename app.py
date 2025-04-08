@@ -7,9 +7,6 @@ import firebase_admin
 from firebase_admin import credentials, storage
 from flask_cors import CORS
 
-app = Flask(__name__)
-CORS(app, origins=["chrome-extension://piahfocncoagnafmgkijmniimnjfaddi"])
-
 # --- Load Firebase Credentials from Environment ---
 FIREBASE_CREDS_JSON = os.getenv("FIREBASE_CREDENTIALS_JSON")
 BUCKET_NAME = "automemer-1e892"
@@ -34,6 +31,8 @@ def upload_to_firebase(local_path: str, remote_path: str) -> str:
 
 # --- Flask App ---
 app = Flask(__name__)
+CORS(app, origins=["chrome-extension://piahfocncoagnafmgkijmniimnjfaddi"])
+
 
 @app.route("/upload", methods=["POST"])
 def upload_image():
