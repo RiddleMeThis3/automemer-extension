@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Momo's Meme Uploader",
+    "version": "1.0",
+    "description": "Right-click any image to upload to Momo's Meme Machine.",
+    "permissions": [
+      "contextMenus",
+      "scripting",
+      "activeTab"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  }
